@@ -141,6 +141,16 @@ import { ClipboardModule } from 'ngx-clipboard';
           },
         },
         {
+          path: 'custom-hour-duration',
+          loadChildren: () =>
+            import('./demo-modules/custom-hour-duration/module').then(
+              (m) => m.DemoModule
+            ),
+          data: {
+            label: 'Custom hour duration',
+          },
+        },
+        {
           path: 'day-view-start-end',
           loadChildren: () =>
             import('./demo-modules/day-view-start-end/module').then(
@@ -438,6 +448,24 @@ import { ClipboardModule } from 'ngx-clipboard';
             ),
           data: {
             label: 'Public holidays',
+          },
+        },
+        {
+          path: 'rtl',
+          loadChildren: () =>
+            import('./demo-modules/rtl/module').then((m) => m.DemoModule),
+          data: {
+            label: 'RTL',
+          },
+        },
+        {
+          path: 'validate-drag-and-resize',
+          loadChildren: () =>
+            import('./demo-modules/validate-drag-and-resize/module').then(
+              (m) => m.DemoModule
+            ),
+          data: {
+            label: 'Validate dragging and resizing',
           },
         },
         {
