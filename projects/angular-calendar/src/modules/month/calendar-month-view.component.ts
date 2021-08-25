@@ -493,7 +493,9 @@ export class CalendarMonthViewComponent
   protected refreshBody(): void {
     this.view = this.utils.getMonthView(
       {
-        events: this.events,
+        events: this.notes?.length
+          ? [...this.events, ...this.notes]
+          : this.events,
         viewDate: this.viewDate,
         weekStartsOn: this.weekStartsOn,
         excluded: this.excludeDays,
