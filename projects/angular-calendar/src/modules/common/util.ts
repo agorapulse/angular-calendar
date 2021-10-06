@@ -174,6 +174,7 @@ export function getWeekViewPeriod(
     let viewEnd = tzDateAdapter.endOfDay(
       addDaysWithExclusions(tzDateAdapter, viewStart, daysInWeek - 1, excluded)
     );
+    // Sometimes interval between viewEnd and viewStart is more then 7 days so we handle this to keep it 7 days
     while (tzDateAdapter.differenceInDays(viewEnd, viewStart) > 6) {
       viewEnd = tzDateAdapter.subDays(viewEnd, 1);
     }
@@ -186,6 +187,7 @@ export function getWeekViewPeriod(
     ) {
       viewEnd = tzDateAdapter.subDays(viewEnd, 1);
     }
+    // Sometimes interval between viewEnd and viewStart is more then 7 days so we handle this to keep it 7 days
     while (tzDateAdapter.differenceInDays(viewEnd, viewStart) > 6) {
       viewEnd = tzDateAdapter.subDays(viewEnd, 1);
     }

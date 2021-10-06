@@ -491,6 +491,7 @@ export class CalendarMonthViewComponent
   }
 
   protected refreshBody(): void {
+    // get the view of events with timezone information
     const viewEvent = this.events
       ? this.utils.getMonthView(
           {
@@ -503,6 +504,7 @@ export class CalendarMonthViewComponent
           this.timezone
         )
       : null;
+    // get the view of notes without timezone information
     const viewNotes = this.notes
       ? this.utils.getMonthView({
           events: this.notes,
@@ -513,6 +515,7 @@ export class CalendarMonthViewComponent
         })
       : null;
     if (viewEvent && viewNotes) {
+      // Merge events & notes
       const tempEvent = viewEvent;
       let i = 0;
       tempEvent.days.forEach((day) => {
