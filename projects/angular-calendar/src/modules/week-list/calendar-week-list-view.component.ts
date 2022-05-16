@@ -767,7 +767,8 @@ export class CalendarWeekListViewComponent
           this.weekStartsOn,
           this.excludeDays,
           this.daysInWeek,
-          withTimezone ? this.timezone : null
+          this.timezone,
+          !withTimezone
         ),
       },
       withTimezone ? this.timezone : null
