@@ -126,7 +126,7 @@
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "mocha": "^7.2.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.31",
     "ng-packagr": "^9.1.5",
     "ngx-clipboard": "^13.0.1",
