@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/node": "^12.12.14",
     "concurrently": "^5.0.0",
-    "lite-server": "^2.5.4",
+    "lite-server": "^2.6.1",
     "typescript": "~3.5.3"
   },
   "scripts": {
