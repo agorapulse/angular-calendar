@@ -14,7 +14,7 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "angular-calendar": "^0.28.2",
     "core-js": "^2.6.10",
-    "date-fns": "^2.8.1",
+    "dayjs": "1.11.6",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.5.3",
     "zone.js": "^0.9.1"

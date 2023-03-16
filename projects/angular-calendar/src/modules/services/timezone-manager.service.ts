@@ -1,9 +1,8 @@
 import * as moment from 'moment';
 import * as MomentTz from 'moment-timezone';
-import isAfterFns from 'date-fns/esm/isAfter';
-import isBeforeFns from 'date-fns/esm/isBefore';
 import { Injectable } from '@angular/core';
 import { TimezoneInfo } from './timezone-info.model';
+import dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root',
@@ -89,19 +88,19 @@ export class TimezoneManager {
     let offset: number = null;
     let offsetInDST: number = null;
 
-    const startOfYear = MomentTz.tz({ year: year }, timezone);
+    const startOfYear = MomentTz.tz({ year }, timezone);
     const endOfYear = startOfYear.clone().endOf('year');
     const monthCount = endOfYear.diff(startOfYear, 'months') + 1;
 
     // Iterate through all the months to find the ones containing the DST switch
     let previousOffset = startOfYear.clone().subtract(1, 's').utcOffset();
     for (let month = 0; month < monthCount; month++) {
-      const startOfMonth = MomentTz.tz({ year: year, month: month }, timezone);
+      const startOfMonth = MomentTz.tz({ year, month }, timezone);
       const endOfMonth = startOfMonth.clone().endOf('month');
       let offsetDiff =
         startOfMonth.utcOffset() - endOfMonth.utcOffset() ||
         previousOffset - startOfMonth.utcOffset();
-      if (offsetDiff != 0) {
+      if (offsetDiff !== 0) {
         // DST switch occurs during this month
         const dayCount = endOfMonth.clone().diff(startOfMonth, 'days') + 1;
 
@@ -113,13 +112,13 @@ export class TimezoneManager {
           offsetDiff =
             startOfDay.utcOffset() - endOfDay.utcOffset() ||
             previousOffset - startOfDay.utcOffset();
-          if (offsetDiff != 0) {
+          if (offsetDiff !== 0) {
             // a DST switch occurs during this hour
             const hourCount = endOfDay.diff(startOfDay, 'hours') + 1;
 
             // Iterate through all the hours to find the DST switch
             for (let hour = 0; hour < hourCount; hour++) {
-              let startOfHour = startOfDay.clone().hour(hour);
+              const startOfHour = startOfDay.clone().hour(hour);
               offsetDiff = previousOffset - startOfHour.utcOffset();
 
               if (offsetDiff < 0) {
@@ -158,17 +157,20 @@ export class TimezoneManager {
       startOfDST: startOfDST ? startOfDST.toDate() : null,
       endOfDST: endOfDST ? endOfDST.toDate() : null,
       offset: offset || startOfYear.utcOffset(),
-      offsetInDST: offsetInDST,
+      offsetInDST,
     };
   }
 
   private isInDST(date: Date, startOfDST: Date, endOfDST: Date): boolean {
     if (startOfDST && endOfDST) {
-      return isAfterFns(date, startOfDST) && isBeforeFns(date, endOfDST);
+      return (
+        dayjs(date).isAfter(dayjs(startOfDST)) &&
+        dayjs(date).isBefore(dayjs(endOfDST))
+      );
     } else if (startOfDST && !endOfDST) {
-      return isAfterFns(date, startOfDST);
+      return dayjs(date).isAfter(dayjs(startOfDST));
     } else if (!startOfDST && endOfDST) {
-      return isBeforeFns(date, endOfDST);
+      return dayjs(date).isBefore(dayjs(endOfDST));
     }
     return false;
   }
