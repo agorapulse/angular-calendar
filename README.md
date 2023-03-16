@@ -56,7 +56,7 @@ ng add angular-calendar
 First install through npm:
 
 ```bash
-npm install --save angular-calendar date-fns
+npm install --save angular-calendar dayjs
 ```
 
 Next include the CSS file in the global (not component scoped) styles of your app:
