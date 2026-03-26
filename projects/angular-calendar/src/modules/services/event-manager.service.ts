@@ -63,7 +63,7 @@ export class EventManagerService {
       return (
         (event.start >= startDate && event.start < weekEnd) ||
         (nextDayStart && nextDayStart >= startDate && nextDayStart < weekEnd) ||
-        (event.start < startDate && nextDayStart && nextDayStart > weekEnd)
+        (event.start < startDate && nextDayStart && nextDayStart >= weekEnd)
       );
     });
   }
