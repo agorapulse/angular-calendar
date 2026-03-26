@@ -5,7 +5,8 @@
     "types": [
       "mocha",
       "node"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "files": [
     "test/entry.ts"
@@ -13,5 +14,8 @@
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
+  ],
+  "exclude": [
+    "schematics/**/*"
   ]
 }

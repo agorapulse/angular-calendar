@@ -5,6 +5,13 @@ module.exports = (config) => {
   config.set({
     basePath: '',
     frameworks: ['mocha', '@angular-devkit/build-angular'],
+    webpack: {
+      resolve: {
+        fallback: {
+          util: require.resolve('util/'),
+        },
+      },
+    },
     plugins: [
       require('karma-mocha'),
       require('karma-mocha-reporter'),
