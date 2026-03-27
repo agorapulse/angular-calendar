@@ -10,7 +10,7 @@ import {
   MOMENT,
 } from '../index';
 import { adapterFactory } from '../src/date-adapters/date-fns';
-import { DateAdapter } from 'angular-calendar';
+import { DateAdapter } from '../src/date-adapters';
 
 @Component({
   template:
