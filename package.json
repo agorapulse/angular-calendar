@@ -110,8 +110,10 @@
     "codelyzer": "^6.0.2",
     "copyfiles": "^2.4.1",
     "core-js": "^3.25.2",
+    "cross-env": "^10.1.0",
     "css-loader": "^3.5.3",
     "date-fns": "^2.29.3",
+    "del-cli": "^7.0.0",
     "flatpickr": "^4.6.3",
     "highlightjs-loader": "^0.2.3",
     "husky": "^4.2.5",
@@ -151,11 +153,20 @@
     "angular-draggable-droppable": "^7.0.0"
   },
   "dependencies": {
+    "@angular-eslint/builder": "^16.3.1",
+    "@angular-eslint/eslint-plugin": "^16.3.1",
+    "@angular-eslint/eslint-plugin-template": "^16.3.1",
+    "@angular-eslint/schematics": "^16.3.1",
+    "@angular-eslint/template-parser": "^16.3.1",
     "@scarf/scarf": "^1.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "angular-resizable-element": "^6.0.0",
     "calendar-utils": "^0.8.0",
+    "eslint": "^8.57.1",
     "positioning": "^2.0.1",
     "sass": "^1.55.0",
+    "stylelint-config-standard-scss": "^6.1.0",
     "tslib": "^2.4.0"
   },
   "sideEffects": [
