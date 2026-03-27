@@ -19,7 +19,11 @@ export function getProjectFromWorkspace(
   workspace: WorkspaceSchema,
   projectName?: string
 ): WorkspaceProject {
-  const project = workspace.projects[projectName || workspace.defaultProject!];
+  const name =
+    projectName ||
+    workspace.defaultProject ||
+    Object.keys(workspace.projects)[0];
+  const project = workspace.projects[name];
 
   if (!project) {
     throw new Error(`Could not find project in workspace: ${projectName}`);

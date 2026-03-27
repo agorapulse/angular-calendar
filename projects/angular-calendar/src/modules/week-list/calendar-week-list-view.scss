@@ -129,9 +129,11 @@ $cal-week-list-view-vars: map-merge($cal-vars, $cal-week-list-view-vars);
 
   .cal-note-header-container {
     display: flex;
+
     .cal-note-header {
       flex: 1;
       border-right: 1px solid #e1e1e1;
+
       &:first-child {
         border-left: 1px solid #e1e1e1;
       }
@@ -151,6 +153,7 @@ $cal-week-list-view-vars: map-merge($cal-vars, $cal-week-list-view-vars);
       top: 0;
       z-index: 0;
     }
+
     .cal-events-row-container {
       padding-bottom: 4px;
       border-bottom: 1px solid #e1e1e1;

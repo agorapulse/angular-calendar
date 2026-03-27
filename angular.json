@@ -128,6 +128,15 @@
             "sourceMap": true,
             "include": ["../test/**/*.spec.ts"]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/angular-calendar/**/*.ts",
+              "projects/angular-calendar/**/*.html"
+            ]
+          }
         }
       }
     }

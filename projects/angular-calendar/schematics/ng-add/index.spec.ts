@@ -2,15 +2,12 @@ import {
   SchematicTestRunner,
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
-import { getWorkspace } from '@schematics/angular/utility/config';
-
 import * as path from 'path';
 import { expect } from 'chai';
 
 import { createTestApp } from '../testing/workspace';
 import { Schema } from './schema';
 import { angularCalendarVersion, momentVersion } from './version-names';
-import { getProjectFromWorkspace, getProjectTargetOptions } from '../utils';
 
 const collectionPath = path.join(__dirname, '../collection.json');
 
@@ -112,10 +109,12 @@ describe('angular-calendar schematics', () => {
       .runSchematicAsync('ng-add', defaultOptions, appTree)
       .toPromise();
 
-    const workspace = getWorkspace(tree);
-    const project = getProjectFromWorkspace(workspace);
-    const styles = getProjectTargetOptions(project, 'build').styles;
-    const stylesTest = getProjectTargetOptions(project, 'test').styles;
+    const workspace = JSON.parse(tree.readContent('/angular.json'));
+    const projectName =
+      workspace.defaultProject || Object.keys(workspace.projects)[0];
+    const project = workspace.projects[projectName];
+    const styles = project.architect.build.options.styles;
+    const stylesTest = project.architect.test.options.styles;
 
     expect(styles[0]).to.contains(defaultAngularCalendarStylePath);
     expect(stylesTest[0]).to.contains(defaultAngularCalendarStylePath);

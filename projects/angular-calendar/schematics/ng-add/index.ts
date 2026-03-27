@@ -6,8 +6,8 @@ import {
   chain,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getWorkspace } from '@schematics/angular/utility/config';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
+import { WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 import { insertImport } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 import {
@@ -101,7 +101,9 @@ function addModuleToImports(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
     context.logger.log('info', `Add modules imports options...`);
 
-    const workspace = getWorkspace(host);
+    const workspace: WorkspaceSchema = JSON.parse(
+      host.read('angular.json')!.toString()
+    );
     const project = getProjectFromWorkspace(workspace, options.projectName);
     const mainPath = getProjectMainFile(project);
     const appModulePath = options.module

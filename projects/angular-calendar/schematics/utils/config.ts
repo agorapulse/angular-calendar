@@ -1,11 +1,4 @@
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
-import { getWorkspace } from '@schematics/angular/utility/config';
-import {
-  WorkspaceProject,
-  WorkspaceSchema,
-} from '@schematics/angular/utility/workspace-models';
-
-import { getProjectFromWorkspace } from '.';
 
 const ANGULAR_CONFIG_PATH = 'angular.json';
 
@@ -14,20 +7,24 @@ export function addStyle(
   stylePath: string,
   projectName?: string
 ): void {
-  const workspace = getWorkspace(host);
-  const appConfig = getAngularAppConfig(workspace, projectName);
+  const workspaceJson = JSON.parse(host.read(ANGULAR_CONFIG_PATH)!.toString());
+  const name =
+    projectName ||
+    workspaceJson.defaultProject ||
+    Object.keys(workspaceJson.projects)[0];
+  const project = workspaceJson.projects[name];
 
-  if (appConfig) {
-    appConfig.architect.build.options.styles.unshift(stylePath);
-    appConfig.architect.test.options.styles.unshift(stylePath);
+  if (project && isAngularBrowserProject(project)) {
+    project.architect.build.options.styles.unshift(stylePath);
+    project.architect.test.options.styles.unshift(stylePath);
 
-    writeConfig(host, workspace);
+    writeConfig(host, workspaceJson);
   } else {
     throw new SchematicsException(`project configuration could not be found`);
   }
 }
 
-function writeConfig(host: Tree, config: WorkspaceSchema): void {
+function writeConfig(host: Tree, config: any): void {
   const DEFAULT_ANGULAR_INDENTION = 2;
   host.overwrite(
     ANGULAR_CONFIG_PATH,
@@ -42,16 +39,4 @@ function isAngularBrowserProject(projectConfig: any): boolean {
   }
 
   return false;
-}
-
-function getAngularAppConfig(
-  workspace: WorkspaceSchema,
-  projectName: string
-): WorkspaceProject | null {
-  const projectConfig = getProjectFromWorkspace(
-    workspace,
-    projectName ? projectName : workspace.defaultProject
-  );
-
-  return isAngularBrowserProject(projectConfig) ? projectConfig : null;
 }
