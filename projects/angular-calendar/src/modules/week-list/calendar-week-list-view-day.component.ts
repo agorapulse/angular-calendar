@@ -10,6 +10,7 @@ import { PlacementArray } from 'positioning';
 import { ValidateDrag } from 'angular-draggable-droppable';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-list-view-day',
   template: `
     <ng-template

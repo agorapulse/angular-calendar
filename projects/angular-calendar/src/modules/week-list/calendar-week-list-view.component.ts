@@ -68,6 +68,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
  * ```
  */
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-list-view',
   template: `
     <div class="cal-week-list-view" [ngClass]="{ fillHeight: fillHeight }">

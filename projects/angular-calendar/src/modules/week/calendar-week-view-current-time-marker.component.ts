@@ -12,6 +12,7 @@ import { switchMapTo, startWith, map, switchMap } from 'rxjs/operators';
 import { DateAdapter } from '../../date-adapters/date-adapter';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-view-current-time-marker',
   template: `
     <ng-template

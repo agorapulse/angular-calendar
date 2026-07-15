@@ -13,6 +13,7 @@ import { isWithinThreshold, trackByEventId } from '../common/util';
 import { PlacementArray } from 'positioning';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-month-cell',
   template: `
     <ng-template

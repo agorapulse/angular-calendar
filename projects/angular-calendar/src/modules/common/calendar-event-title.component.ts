@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-event-title',
   template: `
     <ng-template #defaultTemplate let-event="event" let-view="view">

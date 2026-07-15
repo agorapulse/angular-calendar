@@ -10,6 +10,7 @@ import { A11yParams } from './calendar-a11y.interface';
  * ```
  */
 @Pipe({
+  standalone: false,
   name: 'calendarA11y',
 })
 export class CalendarA11yPipe implements PipeTransform {

@@ -3,6 +3,7 @@ import { CalendarEvent } from 'calendar-utils';
 import { CalendarEventTitleFormatter } from './calendar-event-title-formatter.provider';
 
 @Pipe({
+  standalone: false,
   name: 'calendarEventTitle',
 })
 export class CalendarEventTitlePipe implements PipeTransform {
