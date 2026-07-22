@@ -9,6 +9,7 @@ import { WeekViewAllDayEvent, WeekViewTimeEvent } from 'calendar-utils';
 import { PlacementArray } from 'positioning';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-list-view-event',
   template: `
     <ng-template

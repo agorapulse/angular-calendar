@@ -5,6 +5,7 @@
     "declaration": true,
     "stripInternal": true,
     "outDir": "./dist/angular-calendar/date-adapters",
+    "rootDir": "./projects/angular-calendar/src/date-adapters",
     "types": [],
     "emitDecoratorMetadata": false,
     "baseUrl": "",

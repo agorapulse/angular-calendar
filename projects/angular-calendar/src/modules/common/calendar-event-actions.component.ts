@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { CalendarEvent, EventAction } from 'calendar-utils';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-event-actions',
   template: `
     <ng-template

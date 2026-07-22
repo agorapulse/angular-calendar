@@ -3,6 +3,7 @@ import { CalendarEvent, MonthView } from 'calendar-utils';
 import { EventManagerService } from '../services/event-manager.service';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-month-row',
   template: `
     <div class="cell-day" *ngFor="let day of weekDaysOnWeekSignal()">

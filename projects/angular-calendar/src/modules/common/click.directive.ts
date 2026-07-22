@@ -15,6 +15,7 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
+  standalone: false,
   selector: '[mwlClick]',
 })
 export class ClickDirective implements OnInit, OnDestroy {

@@ -3,12 +3,13 @@ import {
   Input,
   Output,
   EventEmitter,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { CalendarEvent, WeekDay } from 'calendar-utils';
 import { trackByWeekDayHeaderDate } from '../common/util';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-list-view-header',
   template: `
     <ng-template
@@ -57,7 +58,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
       }"
     >
     </ng-template>
-  `
+  `,
 })
 export class CalendarWeekListViewHeaderComponent {
   @Input() days: WeekDay[];

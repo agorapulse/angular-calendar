@@ -6,10 +6,8 @@ import {
   Input,
   ComponentRef,
   Injector,
-  ComponentFactoryResolver,
   ViewContainerRef,
   ElementRef,
-  ComponentFactory,
   Inject,
   Renderer2,
   TemplateRef,
@@ -23,6 +21,7 @@ import { Observable, of, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-tooltip-window',
   template: `
     <ng-template
@@ -58,6 +57,7 @@ export class CalendarTooltipWindowComponent {
 }
 
 @Directive({
+  standalone: false,
   selector: '[mwlCalendarTooltip]',
 })
 export class CalendarTooltipDirective implements OnDestroy, OnChanges {
@@ -73,7 +73,6 @@ export class CalendarTooltipDirective implements OnDestroy, OnChanges {
 
   @Input('tooltipDelay') delay: number | null = null; // tslint:disable-line no-input-rename
 
-  private tooltipFactory: ComponentFactory<CalendarTooltipWindowComponent>;
   private tooltipRef: ComponentRef<CalendarTooltipWindowComponent>;
   private cancelTooltipDelay$ = new Subject();
 
@@ -81,14 +80,9 @@ export class CalendarTooltipDirective implements OnDestroy, OnChanges {
     private elementRef: ElementRef,
     private injector: Injector,
     private renderer: Renderer2,
-    componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
     @Inject(DOCUMENT) private document //tslint:disable-line
-  ) {
-    this.tooltipFactory = componentFactoryResolver.resolveComponentFactory(
-      CalendarTooltipWindowComponent
-    );
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -127,10 +121,8 @@ export class CalendarTooltipDirective implements OnDestroy, OnChanges {
   private show(): void {
     if (!this.tooltipRef && this.contents) {
       this.tooltipRef = this.viewContainerRef.createComponent(
-        this.tooltipFactory,
-        0,
-        this.injector,
-        []
+        CalendarTooltipWindowComponent,
+        { injector: this.injector }
       );
       this.tooltipRef.instance.contents = this.contents;
       this.tooltipRef.instance.customTemplate = this.customTemplate;

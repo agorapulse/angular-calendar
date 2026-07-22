@@ -6,9 +6,11 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
     "experimentalDecorators": true,
     "target": "ES2022",
+    "strict": false,
     "typeRoots": [
       "node_modules/@types"
     ],

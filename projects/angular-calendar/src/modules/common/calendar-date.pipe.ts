@@ -9,6 +9,7 @@ import { CalendarDateFormatter } from './calendar-date-formatter.provider';
  * ```
  */
 @Pipe({
+  standalone: false,
   name: 'calendarDate',
 })
 export class CalendarDatePipe implements PipeTransform {

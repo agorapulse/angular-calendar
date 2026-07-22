@@ -2,6 +2,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { WeekViewHourSegment } from 'calendar-utils';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-view-hour-segment',
   template: `
     <ng-template

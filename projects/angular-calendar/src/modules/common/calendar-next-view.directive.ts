@@ -22,6 +22,7 @@ import { addDaysWithExclusions } from './util';
  * ```
  */
 @Directive({
+  standalone: false,
   selector: '[mwlCalendarNextView]',
 })
 export class CalendarNextViewDirective {

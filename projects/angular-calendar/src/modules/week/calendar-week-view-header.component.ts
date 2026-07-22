@@ -9,6 +9,7 @@ import { CalendarEvent, WeekDay } from 'calendar-utils';
 import { trackByWeekDayHeaderDate } from '../common/util';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-view-header',
   template: `
     <ng-template

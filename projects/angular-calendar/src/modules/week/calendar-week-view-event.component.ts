@@ -13,6 +13,7 @@ import {
 import { PlacementArray } from 'positioning';
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-week-view-event',
   template: `
     <ng-template

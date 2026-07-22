@@ -40,6 +40,7 @@ export const collapseAnimation: AnimationTriggerMetadata = trigger('collapse', [
 ]);
 
 @Component({
+  standalone: false,
   selector: 'mwl-calendar-open-day-events',
   template: `
     <ng-template
