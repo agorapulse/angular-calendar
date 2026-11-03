@@ -6,7 +6,8 @@
       "mocha",
       "node"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUncheckedSideEffectImports": false
   },
   "files": [
     "test/entry.ts"
