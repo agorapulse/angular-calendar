@@ -723,7 +723,7 @@ export class CalendarWeekListViewComponent
 
   private refreshBody(): void {
     this.view = this.getWeekView(this.events);
-    this.notesView = this.getWeekView(this.notes, false);
+    this.notesView = this.getWeekView(this.notes);
   }
 
   private refreshAll(): void {
@@ -741,7 +741,7 @@ export class CalendarWeekListViewComponent
     }
   }
 
-  private getWeekView(events: CalendarEvent[], withTimezone: boolean = true) {
+  private getWeekView(events: CalendarEvent[]) {
     return this.utils.getWeekView(
       {
         events,
@@ -767,11 +767,10 @@ export class CalendarWeekListViewComponent
           this.weekStartsOn,
           this.excludeDays,
           this.daysInWeek,
-          this.timezone,
-          !withTimezone
+          this.timezone
         ),
       },
-      withTimezone ? this.timezone : null
+      this.timezone
     );
   }
 

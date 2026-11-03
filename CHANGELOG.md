@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [22.0.1](https://github.com/agorapulse/angular-calendar/compare/v22.0.0...v22.0.1) (2026-11-03)
+
+
+### Bug Fixes
+
+* **month-view:** lay out notes on the days of the calendar timezone instead of merging a browser-timezone month, which added a day when the calendar timezone is east of the browser
+* **week-list:** compute the notes view in the calendar timezone, like the events
+
 ### [17.0.1](https://github.com/mattlewis92/angular-calendar/compare/v0.27.7...v17.0.1) (2026-03-30)
 
 

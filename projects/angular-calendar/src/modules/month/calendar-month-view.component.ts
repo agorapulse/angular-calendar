@@ -491,8 +491,7 @@ export class CalendarMonthViewComponent
   }
 
   protected refreshBody(): void {
-    // get the view of events with timezone information
-    const viewEvent = this.utils.getMonthView(
+    this.view = this.utils.getMonthView(
       {
         events: this.events,
         viewDate: this.viewDate,
@@ -502,47 +501,6 @@ export class CalendarMonthViewComponent
       },
       this.timezone
     );
-    // get the view of notes without timezone information
-    const viewNotes = this.notes
-      ? this.utils.getMonthView({
-          events: this.notes,
-          viewDate: this.viewDate,
-          weekStartsOn: this.weekStartsOn,
-          excluded: this.excludeDays,
-          weekendDays: this.weekendDays,
-        })
-      : null;
-    if (viewEvent && viewNotes) {
-      // Merge events & notes
-      const tempEvent = viewEvent;
-      // We create a set of the dates without timezones as posts have been calculated with timezones but notes have not
-      const dates: Set<string> = new Set(
-        tempEvent.days
-          .map((day) => day.date.toDateString())
-          .concat(viewNotes.days.map((day) => day.date.toDateString()))
-      );
-      dates.forEach((date) => {
-        if (tempEvent.days.find((day) => day.date.toDateString() === date)) {
-          tempEvent.days
-            .find((day) => day.date.toDateString() === date)
-            .events.concat(
-              viewNotes.days.find((day) => day.date.toDateString() === date)
-                ?.events
-            );
-        } else if (
-          viewNotes.days.find((day) => day.date.toDateString() === date)
-        ) {
-          tempEvent.days.push(
-            viewNotes.days.find((day) => day.date.toDateString() === date)
-          );
-        }
-      });
-      this.view = tempEvent;
-    } else if (this.notes?.length) {
-      this.view = viewNotes;
-    } else {
-      this.view = viewEvent;
-    }
   }
 
   protected checkActiveDayIsOpen(): void {
