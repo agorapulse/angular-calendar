@@ -29,6 +29,7 @@ import { Subject } from 'rxjs';
 import { triggerDomEvent } from './util';
 import { take } from 'rxjs/operators';
 import { adapterFactory } from '../src/date-adapters/date-fns';
+import { CalendarUtils } from '../src/modules/common/calendar-utils.provider';
 import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
 
@@ -1085,4 +1086,29 @@ describe('calendarMonthView component', () => {
     fixture.detectChanges();
     fixture.destroy();
   }));
+
+  it('should lay out notes on the days of the calendar timezone', () => {
+    const utils = TestBed.inject(CalendarUtils);
+    const getMonthView = utils.getMonthView.bind(utils);
+    sinon.stub(utils, 'getMonthView').callsFake((args, timezone) => {
+      const view = getMonthView(args, timezone);
+      if (timezone) {
+        view.days = view.days.map((day) => ({
+          ...day,
+          date: moment(day.date).add(1, 'day').toDate(),
+        }));
+      }
+      return view;
+    });
+    const fixture: ComponentFixture<CalendarMonthViewComponent> =
+      TestBed.createComponent(CalendarMonthViewComponent);
+    fixture.componentInstance.viewDate = new Date('2026-10-15');
+    fixture.componentInstance.timezone = 'Asia/Tokyo';
+    fixture.componentInstance.notes = [
+      { start: new Date('2026-10-15'), title: 'note' },
+    ];
+    fixture.componentInstance.ngOnChanges({ viewDate: {}, notes: {} });
+    expect(fixture.componentInstance.view.days.length).to.equal(35);
+    fixture.destroy();
+  });
 });
